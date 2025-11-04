@@ -161,3 +161,12 @@ async def websocket_endpoint(websocket: WebSocket):
 
 # Serve frontend
 app.mount("/", StaticFiles(directory="../frontend", html=True), name="static")
+from pathlib import Path
+
+FRONTEND_DIR = Path(__file__).parent.parent / "frontend"
+
+app.mount(
+    "/.well-known",
+    StaticFiles(directory=str(FRONTEND_DIR / ".well-known"), html=False),
+    name="wellknown",
+)
